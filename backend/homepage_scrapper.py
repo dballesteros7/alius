@@ -1,19 +1,14 @@
-import requests
-from lxml import html
+import newspaper
+from storage.elastic import ElasticStorage
 
 
 def scrap_huffingtonpost_website():
-    response = requests.get('http://www.huffingtonpost.com/')
-    tree = html.fromstring(response.text)
-
-    #Finding all anchor tags in response
-    links = tree.xpath('//a/@href')
-
-    real_links = filter(lambda x: x.startswith('http://www.huffingtonpost.com/'), links) # Remove all the other stuff
-    real_links = list(set(real_links)) # Remove dups
-    real_links = filter(lambda x: x.endswith('.html'), real_links) # Take only articles
-    real_links = filter(lambda x: not x.startswith('http://www.huffingtonpost.com/p/'), real_links) # Remove the FAQs and about
-    print('\n'.join(real_links))
+    h_paper = newspaper.build('http://chicagotribune.com',
+                              memoize_articles=False)
+    h_paper.download_articles()
+    h_paper.parse_articles()
+    es = ElasticStorage.get_instance()
+    es.store_articles(h_paper.articles, h_paper.url)
 
 
 if __name__ == '__main__':
