@@ -1,7 +1,8 @@
 import os
+import redis
 from flask import Flask, request, jsonify
 from flask.ext.cors import CORS
-from elastic import ElasticStorage
+from database import ElasticStorage, RedisClient
 
 app = Flask(__name__)
 CORS(app)
@@ -26,11 +27,21 @@ source_map = {
 }
 
 
+
+
 @app.route('/search')
 def search():
     query = request.args.get('q', '')
-    client = ElasticStorage.get_instance(dev=False)
-    articles = client.query_articles(query)
+
+    es = ElasticStorage.get_instance(dev=False)
+    r = RedisClient.get_instance(dev=False)
+
+    if r.hexists('popular', query.lower()):
+        r.hincrby('popular', query.lower())
+    else:
+        r.hset('popular', query.lower(), 1)
+
+    articles = es.query_articles(query)
     articles = list(articles)
     for article in articles:
         for key, value in source_map.items():
@@ -43,7 +54,11 @@ def search():
 
 @app.route('/popular')
 def popular():
-    pass
+    r = RedisClient.get_instance(dev=False)
+    pop = r.hgetall('popular')
+    return jsonify(
+        popular=[x.decode('utf-8') for x in sorted(pop, key=pop.__getitem__, reverse=True)]
+    )
 
 
 if __name__ == "__main__":

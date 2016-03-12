@@ -1,6 +1,18 @@
+import redis
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.connections import connections
-from elasticsearch_dsl import DocType, String, Integer
+
+class RedisClient:
+    _instance = None
+
+    @classmethod
+    def get_instance(cls, dev=True):
+        if cls._instance is None:
+            if dev:
+                cls._instance = redis.StrictRedis(host='localhost', port=6379, db=0)
+            else:
+                cls._instance = redis.StrictRedis(host='134.168.40.230', port=6379, db=0)
+        return cls._instance
 
 
 class ElasticStorage:
