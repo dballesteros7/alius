@@ -1,0 +1,32 @@
+<md-content id="main-content" layout="row" flex ng-show="$ctrl.results.length">
+  <div class="news-reel" ng-hide="$ctrl.isLoading()" layout="column" flex>
+    <div ng-repeat="result in $ctrl.results" class="news-item" layout="column"
+      layout-align="start center" ng-click="$ctrl.openLink(result)"
+      md-ink-ripple="#000">
+      <div layout="row" class="news-headline">
+        <div class="headline-image" layout="row" layout-align="center center">
+          <img ng-src="{{ result.top_image }}">
+        </div>
+        <div class="headline-text">
+          <div class="md-subhead">
+            {{ result.title }}
+          </div>
+          <div class="md-caption">
+            By {{ result.source }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</md-content>
+<div flex ng-show="$ctrl.isLoading()" layout="row" layout-align="center center">
+  <md-progress-circular></md-progress-circular>
+</div>
+<div flex ng-hide="$ctrl.results.length || $ctrl.isLoading()" layout="column"
+     layout-align="start center" layout-padding>
+  <h3 class="md-display-1">Discover all points of view</h3>
+  <p class="md-headline">
+    Click/press the search button to start.
+  </p>
+</div>
+
