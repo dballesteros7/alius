@@ -1,13 +1,15 @@
 (function () {
   'use strict';
 
-  function ToolbarController($log) {
+  function ToolbarController($log, $mdSidenav) {
     var vm = this;
 
     vm.titleShown = true;
 
     vm.onSearchBarExpanded = onSearchBarExpanded;
     vm.onSearchBarCollapsed = onSearchBarCollapsed;
+
+    vm.showSidenav = showSidenav;
 
     // -------------------------------------------------------------------------
 
@@ -19,9 +21,13 @@
     function onSearchBarCollapsed() {
       vm.titleShown = true;
     }
+
+    function showSidenav() {
+      $mdSidenav('left').toggle();
+    }
   }
 
-  ToolbarController.$inject = ['$log'];
+  ToolbarController.$inject = ['$log', '$mdSidenav'];
 
 
   angular.module('alius')

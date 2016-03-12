@@ -1,9 +1,30 @@
-<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
-            md-component-id="left"
-            md-is-locked-open="$mdMedia('gt-sm')">
+<md-sidenav class="md-sidenav-left md-whiteframe-z2"
+            md-component-id="left" flex
+            md-is-locked-open="$mdMedia('gt-sm')" fe>
+  <md-toolbar class="md-whiteframe-z1 md-medium-tall" layout-align="center stretch">
+    <div class="md-toolbar-tools" layout="column" layout-align="start stretch">
+      <h3 class="md-title">Alius</h3>
+      <span class="md-subhead">A balanced view</span>
+    </div>
 
-  <md-toolbar class="md-whiteframe-z1">
-    <h3>Options</h3>
   </md-toolbar>
+  <md-list flex>
+    <md-list-item ng-click="$ctrl.goTo('home')">
+      <md-icon md-font-set="material-icons">home</md-icon>
+      <p>Home</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon md-font-set="material-icons">people</md-icon>
+      <p>Team</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon md-font-set="material-icons">help</md-icon>
+      <p>Help</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon md-font-set="material-icons">feedback</md-icon>
+      <p>Feedback</p>
+    </md-list-item>
+  </md-list>
 
 </md-sidenav>

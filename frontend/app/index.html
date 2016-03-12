@@ -31,11 +31,11 @@
   </head>
 
   <body ng-app="alius" layout="row" ng-cloak>
-    <alius-sidenav></alius-sidenav>
+    <alius-sidenav layout="column"></alius-sidenav>
 
     <div flex layout="column">
       <alius-toolbar></alius-toolbar>
-      <ui-view flex layout="row">
+      <ui-view flex layout="row" layout-padding>
       </ui-view>
     </div>
 
@@ -72,6 +72,7 @@
     <script src="src/toolbar/search-bar.component.js"></script>
     <script src="src/toolbar/toolbar.controller.js"></script>
     <script src="src/toolbar/toolbar.component.js"></script>
+    <script src="src/sidenav/sidenav.controller.js"></script>
     <script src="src/sidenav/sidenav.component.js"></script>
     <script src="src/content/sentiment-colorer.directive.js"></script>
     <script src="src/content/content.component.js"></script>
