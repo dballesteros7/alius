@@ -1,1 +1,19 @@
-Home!
+<md-content layout="column" flex ng-show="$ctrl.results.length">
+  <md-subheader class="headliner" layout="row" layout-align="start center">
+    <md-icon md-font-set="material-icons">whatshot</md-icon>
+    <span flex>Trending searches</span>
+  </md-subheader>
+  <md-list>
+    <md-list-item ng-repeat="result in $ctrl.results"
+                  ng-class="{'md-display-2': $index < 2,
+                             'md-display-1': $index >= 2 && $index < 4,
+                             'md-headline': $index >= 4 && $index < 6,
+                             'md-title': $index >= 6 && $index < 8,
+                             'md-subhead': $index >= 8}"
+                  ui-sref="search({q: result})">
+      <div class="md-list-item-text">
+        {{ $index + 1 }}. {{ result }}
+      </div>
+    </md-list-item>
+  </md-list>
+</md-content>

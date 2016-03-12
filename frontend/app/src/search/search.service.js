@@ -6,6 +6,7 @@
     var api = this;
 
     api.search = search;
+    api.popular = popular;
 
     // -------------------------------------------------------------------------
 
@@ -30,6 +31,27 @@
           };
         }
         searchResultsService.updateResults(query, httpData.data.articles);
+      })
+    }
+
+    function popular() {
+      searchResultsService.startLoad();
+      return $http({
+        url: 'http://alius-server.eu-gb.mybluemix.net/popular',
+      }).then(function (httpData) {
+        $log.debug(httpData.data);
+        searchResultsService.endLoad();
+        var terms = [];
+        for(var term in httpData.data) {
+          if (term === 'true' || term === '') {
+            continue;
+          }
+          terms.push(term);
+        }
+        terms.sort(function(item) {
+          return httpData.data[item];
+        });
+        searchResultsService.updateResults('', terms);
       })
     }
   }

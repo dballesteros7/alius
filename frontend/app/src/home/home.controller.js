@@ -1,11 +1,15 @@
 (function () {
   'use strict';
 
-  function HomeController() {
+  function HomeController(searchService, searchResultsService) {
 
+    var vm = this;
+    vm.results = searchResultsService.results;
+
+    searchService.popular();
   }
 
-  HomeController.$inject = [];
+  HomeController.$inject = ['searchService', 'searchResultsService'];
 
   angular.module('alius')
       .controller('HomeController', HomeController);

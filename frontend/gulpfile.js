@@ -4,16 +4,33 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     cssnano = require('gulp-cssnano'),
     gls = require('gulp-live-server'),
+    browserSync = require('browser-sync').create(),
     templateCache = require('gulp-angular-templatecache');
 
 var paths = {
   views: ['./app/**/*.html', '!./app/index.html']
 };
 
+gulp.task('serve', ['templates'], function () {
+  browserSync.init({
+    server: {
+      baseDir: ['./', 'app/'],
+      routes: {
+        'node_modules/': 'node_modules/'
+      }
+    }
+  });
+  gulp.watch(paths.views, ['templates-watch']);
+});
+
 gulp.task('templates', function () {
   return gulp.src(paths.views)
       .pipe(templateCache())
       .pipe(gulp.dest('./app/src/'));
+});
+
+gulp.task('templates-watch', ['templates'], function () {
+  browserSync.reload();
 });
 
 
