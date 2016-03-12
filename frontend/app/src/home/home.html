@@ -1,4 +1,4 @@
-<md-content layout="column" flex ng-show="$ctrl.results.length">
+<md-content layout="column" flex ng-show="$ctrl.results.length && !$ctrl.isLoading()">
   <md-subheader class="headliner" layout="row" layout-align="start center">
     <md-icon md-font-set="material-icons">whatshot</md-icon>
     <span flex>Trending searches</span>
@@ -17,3 +17,6 @@
     </md-list-item>
   </md-list>
 </md-content>
+<div flex ng-show="$ctrl.isLoading()" layout="row" layout-align="center center">
+  <md-progress-circular></md-progress-circular>
+</div>

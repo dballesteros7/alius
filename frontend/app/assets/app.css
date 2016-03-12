@@ -31,8 +31,7 @@ alius-search-bar.flexed {
 }
 
 alius-search-bar > md-input-container {
-  background: #81C784;
-  transition: width 0.8s;
+  transition: width 0.6s;
 }
 
 alius-search-bar > md-input-container.expanded {

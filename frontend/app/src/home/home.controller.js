@@ -5,8 +5,13 @@
 
     var vm = this;
     vm.results = searchResultsService.results;
+    vm.isLoading = isLoading;
 
     searchService.popular();
+
+    function isLoading() {
+      return searchResultsService.isLoading;
+    }
   }
 
   HomeController.$inject = ['searchService', 'searchResultsService'];
