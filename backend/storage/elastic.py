@@ -6,7 +6,7 @@ class ElasticStorage:
     _instance = None
 
     def __init__(self):
-        self.url = 'http://172.17.0.2:9200'
+        self.url = 'http://134.168.38.217:9200'
         connections.create_connection(hosts=[self.url])
         Article.init()
 
