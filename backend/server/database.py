@@ -38,9 +38,11 @@ class ElasticStorage:
         search = search.query(q)
         search.execute()
         for hit in search:
-            yield {
-                'title': hit.title,
-                'body': hit.body,
-                'url': hit.url,
-                'top_image': hit.top_image
-            }
+            if '#' not in hit.url and '?' not in hit.url:
+                yield {
+                    'id': hit.meta.id,
+                    'title': hit.title,
+                    'body': hit.body,
+                    'url': hit.url,
+                    'top_image': hit.top_image
+                }

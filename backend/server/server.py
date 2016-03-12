@@ -1,5 +1,5 @@
 import os
-import redis
+import collections
 from flask import Flask, request, jsonify
 from flask.ext.cors import CORS
 from database import ElasticStorage, RedisClient
@@ -9,7 +9,8 @@ CORS(app)
 
 source_map = {
     'cnn.com': 'CNN', 'nytimes.com': 'New York Times',
-    'huffingtonpost.com': 'The Huffington Post', 'theguardian.com': 'The Guardian',
+    'huffingtonpost.com': 'The Huffington Post',
+    'huffingtonpost.ca': 'The Huffington Post', 'theguardian.com': 'The Guardian',
     'foxnews.com': 'Fox News', 'forbes.com': 'Forbes',
     'timesofindia.indiatimes.com': 'The Times of India', 'bbc.co.uk': 'BBC',
     'usatoday.com': 'USA Today', 'bloomberg.com': 'Bloomberg',
@@ -56,9 +57,13 @@ def search():
 def popular():
     r = RedisClient.get_instance(dev=False)
     pop = r.hgetall('popular')
-    return jsonify(
-        popular=[x.decode('utf-8') for x in sorted(pop, key=pop.__getitem__, reverse=True)]
-    )
+    sorted_searches = sorted(pop, key=pop.__getitem__, reverse=True)[0:10]
+
+    final_dict = {}
+    for sorted_search in sorted_searches:
+        final_dict[sorted_search.decode('utf-8')] = int(pop[sorted_search].decode('utf-8'))
+
+    return jsonify(final_dict)
 
 
 if __name__ == "__main__":
