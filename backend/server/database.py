@@ -1,9 +1,12 @@
 import json
 
 import redis
+from elasticsearch import ConnectionTimeout
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.connections import connections
 from article import Article
+
+from submod import select_k_and_sort
 from watson_developer_cloud import WatsonException
 
 
@@ -44,13 +47,15 @@ class ElasticStorage:
                             Q('match', body=query)])
         search = search.query(q)
         search.execute()
-        for hit in search:
+        documents = []
+        for hit in search[:100]:
             if '#' not in hit.url and '?' not in hit.url:
-                yield {
+                documents.append({
                     'id': hit.meta.id,
                     'title': hit.title,
                     'body': hit.body,
                     'url': hit.url,
+                    'score': hit.meta.score,
                     'tone': dict(
                         joy=hit.tone.joy,
                         fear=hit.tone.fear,
@@ -59,7 +64,12 @@ class ElasticStorage:
                         anger=hit.tone.anger
                     ),
                     'top_image': hit.top_image
-                }
+                })
+        if len(documents) < 10:
+            return documents
+        else:
+            return select_k_and_sort(documents)
+
 
     def update_sentiments(self):
         from watson_developer_cloud import ToneAnalyzerV3Beta
@@ -67,7 +77,7 @@ class ElasticStorage:
                                    password='kkxjxbSSypDJ',
                                    version='2016-02-11')
         client = connections.get_connection()
-        search = Search(using=client, index='articles')
+        search = Search(using=client, index='articles', doc_type='article')
         q = Q('bool', must=[Q('missing', field='watson_analyzed')])
         search = search.query(q)
         counter = 0
@@ -87,13 +97,27 @@ class ElasticStorage:
                 doc.watson_analyzed = True
                 doc.save()
                 counter += 1
-            if counter % 100 == 0:
-                print(counter)
+            print(counter)
+        if counter == 0:
+            raise RealError()
+
+
+class RealError(Exception):
+    pass
+
 
 def main():
+    # while True:
     es = ElasticStorage.get_instance(dev=False)
-    for doc in es.query_articles('true'):
+    for doc in es.query_articles('Republican Party'):
         print(doc)
+        # try:
+        #     es.update_sentiments()
+        # except RealError:
+        #     print('done')
+        #     return
+        # except Exception:
+        #     print('Crashed')
 
 if __name__ == '__main__':
     main()
