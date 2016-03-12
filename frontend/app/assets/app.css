@@ -77,3 +77,7 @@ alius-search-bar > md-input-container.collapsed {
   background: #8BC34A;
   color: #000;
 }
+
+.md-scroll-mask {
+  z-index: 10 !important;
+}
