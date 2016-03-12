@@ -87,3 +87,34 @@ alius-search-bar > md-input-container.collapsed {
   max-width: 100%;
   max-height: 100%;
 }
+
+.teal-900 {
+  background: #004D40;
+  color: #FFF
+}
+
+.teal-500 {
+  background: #009688;
+  color: #FFF;
+}
+
+.teal-200 {
+  background: #80CBC4;
+  color: #000;
+}
+
+.amber-900 {
+  background: #FF6F00;
+}
+
+.amber-500 {
+  background: #FFC107;
+}
+
+.amber-200 {
+  background: #FFE082;
+}
+
+.clickable-tile {
+  cursor: pointer;
+}

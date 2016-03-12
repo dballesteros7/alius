@@ -2,23 +2,30 @@
   <md-icon md-font-set="material-icons">whatshot</md-icon>
   Trending searches
 </md-subheader>
-<md-content layout="column" flex
+<md-content layout="column" flex class="md-whiteframe-z2"
             ng-show="$ctrl.results.length && !$ctrl.isLoading()">
-  <md-list>
-    <md-list-item ng-repeat="result in $ctrl.results"
-                  analytics-on="click"
-                  analytics-event="trending-word-click"
-                  ng-class="{'md-display-2': $index < 2,
-                             'md-display-1': $index >= 2 && $index < 4,
-                             'md-headline': $index >= 4 && $index < 6,
-                             'md-title': $index >= 6 && $index < 8,
-                             'md-subhead': $index >= 8}"
-                  ui-sref="search({q: result})">
-      <div class="md-list-item-text">
-        {{ $index + 1 }}. {{ result }}
-      </div>
-    </md-list-item>
-  </md-list>
+  <md-grid-list md-cols-xs="2" md-cols-sm="6" md-cols-gt-sm="6"
+                md-row-height="1:1" md-gutter="0"
+                md-row-height-gt-xs="2:3"
+                md-row-height-gt-md="1:1">
+    <md-grid-tile ng-repeat="result in $ctrl.results.slice(0, 2)"
+                  md-colspan-gt-xs="3" class="amber-900 clickable-tile"
+                  md-ink-ripple="#000"
+                  md-rowspan-xs="2" ui-sref="search({q: result})">
+      <span class="md-display-3">{{ result }}</span>
+    </md-grid-tile>
+    <md-grid-tile ng-repeat="result in $ctrl.results.slice(2, 5)"
+                  md-colspan-gt-xs="2"
+                  md-colspan-xs="2" class="amber-500 clickable-tile"
+                  md-ink-ripple="#FFA000" ui-sref="search({q: result})">
+      <span class="md-display-2">{{ result }}</span>
+    </md-grid-tile>
+    <md-grid-tile ng-repeat="result in $ctrl.results.slice(4)"
+                  class="amber-200 clickable-tile"
+                  md-ink-ripple="#FFCA28" ui-sref="search({q: result})">
+      <span class="md-display-1">{{ result }}</span>
+    </md-grid-tile>
+  </md-grid-list>
 </md-content>
 <div flex ng-show="$ctrl.isLoading()" layout="row" layout-align="center center">
   <md-progress-circular></md-progress-circular>

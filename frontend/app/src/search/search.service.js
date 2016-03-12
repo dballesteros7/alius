@@ -26,6 +26,21 @@
 
     function popular() {
       searchResultsService.startLoad();
+      //return $q.when([]).then(function() {
+      //  searchResultsService.updateResults('', [
+      //    'a',
+      //    'b',
+      //    'c',
+      //    'd',
+      //    'e',
+      //    'f',
+      //    'g',
+      //    'h',
+      //    'i',
+      //    'j'
+      //  ]);
+      //  searchResultsService.endLoad();
+      //});
       return $http({
         url: 'http://alius-server.eu-gb.mybluemix.net/popular',
       }).then(function (httpData) {
@@ -38,8 +53,8 @@
           }
           terms.push(term);
         }
-        terms.sort(function(item) {
-          return httpData.data[item];
+        terms.sort(function(a, b) {
+          return httpData.data[b] - httpData.data[a];
         });
         searchResultsService.updateResults('', terms);
       })
