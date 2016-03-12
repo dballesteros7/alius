@@ -1,0 +1,10 @@
+<md-toolbar layout="row" class="md-whiteframe-z1 md-medium-tall"
+            layout-align="start center">
+  <h3 flex ng-show="$ctrl.titleShown" layout="row" layout-align="center stretch">
+    Alius
+  </h3>
+  <alius-search-bar ng-class="{flexed: !$ctrl.titleShown}"
+                    on-expanded="$ctrl.onSearchBarExpanded()"
+                    on-collapsed="$ctrl.onSearchBarCollapsed()">
+  </alius-search-bar>
+</md-toolbar>
