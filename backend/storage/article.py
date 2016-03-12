@@ -1,4 +1,4 @@
-from elasticsearch_dsl import DocType, String, Nested
+from elasticsearch_dsl import DocType, String, Nested, Boolean
 
 
 class Article(DocType):
@@ -9,6 +9,8 @@ class Article(DocType):
     top_image = String()
     body = String()
     source = String()
+    watson_analyzed = Boolean()
+    watson_success = Boolean()
     tone = Nested(
         properties={
             'joy': String(),

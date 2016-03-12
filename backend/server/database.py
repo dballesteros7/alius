@@ -1,6 +1,11 @@
+import json
+
 import redis
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.connections import connections
+from storage.article import Article
+from watson_developer_cloud import WatsonException
+
 
 class RedisClient:
     _instance = None
@@ -34,7 +39,9 @@ class ElasticStorage:
     def query_articles(self, query):
         client = connections.get_connection()
         search = Search(using=client, index='articles')
-        q = Q('match', body=query)
+        q = Q('bool', must=[Q('exists', field='watson_analyzed'),
+                            Q('match', watson_success=True),
+                            Q('match', body=query)])
         search = search.query(q)
         search.execute()
         for hit in search:
@@ -46,3 +53,40 @@ class ElasticStorage:
                     'url': hit.url,
                     'top_image': hit.top_image
                 }
+
+    def update_sentiments(self):
+        from watson_developer_cloud import ToneAnalyzerV3Beta
+        tone_analyzer = ToneAnalyzerV3Beta(username='03774a07-f588-4619-8801-506d251f384b',
+                                   password='kkxjxbSSypDJ',
+                                   version='2016-02-11')
+        client = connections.get_connection()
+        search = Search(using=client, index='articles')
+        q = Q('bool', must=[Q('missing', field='watson_analyzed')])
+        search = search.query(q)
+        counter = 0
+        for result in search.scan():
+            doc = Article.get(result.meta.id)
+            try:
+                analysis = tone_analyzer.tone(text=doc.body)
+                tone_categories = analysis['document_tone']['tone_categories']
+                emotion_tones = list(filter(lambda x: x['category_id'] == 'emotion_tone', tone_categories))[0]
+                doc.tone = {}
+                for tone in emotion_tones['tones']:
+                    doc.tone[tone['tone_id']] = tone['score']
+                doc.watson_success = True
+            except WatsonException:
+                continue
+            finally:
+                doc.watson_analyzed = True
+                doc.save()
+                counter += 1
+            if counter % 100 == 0:
+                print(counter)
+
+def main():
+    es = ElasticStorage.get_instance(dev=False)
+    for doc in es.query_articles('true'):
+        print(doc)
+
+if __name__ == '__main__':
+    main()
