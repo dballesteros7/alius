@@ -8,10 +8,10 @@
 
         $stateProvider.state('home', {
           url: '/home',
-          template: '<alius-home flex layout="row"></alius-home>'
+          template: '<alius-home flex layout="column"></alius-home>'
         }).state('search', {
           url: '/search?q',
-          template: '<alius-content flex layout="row"></alius-content>'
+          template: '<alius-content flex layout="column"></alius-content>'
         })
       }])
 })();

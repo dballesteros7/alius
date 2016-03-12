@@ -1,8 +1,9 @@
-<md-content layout="column" flex ng-show="$ctrl.results.length && !$ctrl.isLoading()">
-  <md-subheader class="headliner" layout="row" layout-align="start center">
-    <md-icon md-font-set="material-icons">whatshot</md-icon>
-    <span flex>Trending searches</span>
-  </md-subheader>
+<md-subheader class="headliner">
+  <md-icon md-font-set="material-icons">whatshot</md-icon>
+  Trending searches
+</md-subheader>
+<md-content layout="column" flex
+            ng-show="$ctrl.results.length && !$ctrl.isLoading()">
   <md-list>
     <md-list-item ng-repeat="result in $ctrl.results"
                   ng-class="{'md-display-2': $index < 2,
