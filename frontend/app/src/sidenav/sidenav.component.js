@@ -3,6 +3,6 @@
 
   angular.module('alius')
       .component('aliusSidenav', {
-        templateUrl: './src/sidenav/sidenav.html'
+        templateUrl: 'src/sidenav/sidenav.html'
       })
 })();

@@ -6,8 +6,9 @@
          placeholder="Search"
          ng-keypress="$ctrl.onKeyPress($event)"
          ng-blur="$ctrl.onBlur($event)"
-         alius-auto-focus alius-focus="$ctrl.focus">
+         alius-auto-focus alius-focus="$ctrl.focus" alius-blur="$ctrl.blur">
 </md-input-container>
-<md-button ng-click="$ctrl.expand($event)" ng-show="$ctrl.showButton">
+<md-button class="md-icon-button"
+           ng-click="$ctrl.expand($event)" ng-show="$ctrl.showButton">
   <md-icon md-font-set="material-icons">search</md-icon>
 </md-button>

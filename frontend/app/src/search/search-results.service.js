@@ -10,6 +10,7 @@
 
     api.isLoading = false;
     api.results = [];
+    api.queryTerm = '';
 
     // -------------------------------------------------------------------------
 
@@ -21,7 +22,8 @@
       api.isLoading = false;
     }
 
-    function updateResults(articles) {
+    function updateResults(queryTerm, articles) {
+      api.queryTerm = queryTerm;
       api.results.length = 0;
       Array.prototype.push.apply(api.results, articles);
       $log.debug(api.results);

@@ -8,9 +8,13 @@
     vm.openLink = openLink;
     vm.isLoading = isLoading;
     vm.isStart = true;
+    vm.queryTerm = queryTerm;
 
     // -------------------------------------------------------------------------
 
+    function queryTerm() {
+      return searchResultsService.queryTerm;
+    }
     function isLoading() {
       return searchResultsService.isLoading;
     }

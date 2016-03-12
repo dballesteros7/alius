@@ -3,7 +3,7 @@
 
   angular.module('alius')
       .component('aliusContent', {
-        templateUrl: './src/content/content.html',
+        templateUrl: 'src/content/content.html',
         controller: 'ContentController'
       })
 })();

@@ -29,7 +29,7 @@
             anger: Math.random()
           };
         }
-        searchResultsService.updateResults(httpData.data.articles);
+        searchResultsService.updateResults(query, httpData.data.articles);
       })
     }
   }

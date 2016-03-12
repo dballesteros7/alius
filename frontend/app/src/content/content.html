@@ -1,8 +1,11 @@
-<md-content id="main-content" layout="row" flex ng-show="$ctrl.results.length">
+<md-content id="main-content" layout="column" flex ng-show="$ctrl.results.length">
+  <md-subheader class="headliner">
+    All points of view on: {{ $ctrl.queryTerm() }}
+  </md-subheader>
   <div class="news-reel" ng-hide="$ctrl.isLoading()" layout="column" flex>
     <div ng-repeat="result in $ctrl.results" class="news-item" layout="column"
       layout-align="start center" ng-click="$ctrl.openLink(result)"
-      md-ink-ripple="#000">
+      md-ink-ripple="#000" sentiment-colorer sentiment="result.tone">
       <div layout="row" class="news-headline">
         <div class="headline-image" layout="row" layout-align="center center">
           <img ng-src="{{ result.top_image }}">

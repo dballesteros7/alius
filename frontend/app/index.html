@@ -9,9 +9,15 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- build:css css/vendor.min.css -->
     <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css"/>
+    <!-- endbuild -->
+
+    <!-- build:css css/app.min.css -->
     <link rel="stylesheet" href="assets/app.css"/>
+    <!-- endbuild -->
 
     <style type="text/css">
         /**
@@ -32,13 +38,16 @@
       <alius-content flex layout="row"></alius-content>
     </div>
 
+    <!-- build:js scripts/vendor.js -->
     <script src="../node_modules/angular/angular.js"></script>
     <script src="../node_modules/angular-animate/angular-animate.js"></script>
     <script src="../node_modules/angular-aria/angular-aria.js"></script>
     <script src="../node_modules/angular-material/angular-material.js"></script>
+    <!-- endbuild -->
 
     <script type="text/javascript">
-          angular.module('alius', ['ngMaterial', 'alius'])
+          angular.module('templates', []);
+          angular.module('alius', ['ngMaterial', 'templates'])
               .config(function($mdThemingProvider){
                  $mdThemingProvider.theme('default')
                         .primaryPalette('green')
@@ -47,6 +56,11 @@
               });
     </script>
 
+    <!-- build:js scripts/templates.js -->
+    <script src="./src/templates.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/app.js -->
     <script src="./src/search/search.service.js"></script>
     <script src="./src/search/search-results.service.js"></script>
     <script src="./src/toolbar/auto-focus.js"></script>
@@ -56,7 +70,9 @@
     <script src="./src/toolbar/toolbar.controller.js"></script>
     <script src="./src/toolbar/toolbar.component.js"></script>
     <script src="./src/sidenav/sidenav.component.js"></script>
+    <script src="./src/content/sentiment-colorer.directive.js"></script>
     <script src="./src/content/content.component.js"></script>
     <script src="./src/content/content.controller.js"></script>
+    <!-- endbuild -->
   </body>
 </html>

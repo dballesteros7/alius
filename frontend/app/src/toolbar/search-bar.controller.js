@@ -51,6 +51,7 @@
       $log.debug($event.keyCode);
       if ($event.keyCode === 13) {
         searchService.search(vm.searchText);
+        vm.blur();
       }
     }
   }

@@ -2,10 +2,6 @@ html, body {
   height: 100%;
 }
 
-.news-reel {
-  padding: 8px 0;
-}
-
 .news-item {
   flex: 0 0 auto;
   padding: 8px;
@@ -32,12 +28,9 @@ html, body {
   flex: 3 0 calc(60% - 16px);
 }
 
-alius-search-bar {
-  padding: 0 8px;
-}
-
 alius-search-bar.flexed {
   flex: 1;
+  padding-right: 8px;
 }
 
 alius-search-bar > md-input-container {
@@ -58,4 +51,8 @@ alius-search-bar > md-input-container.collapsed {
   font-size: 96px;
   height: 96px;
   width: 96px;
+}
+
+.headliner {
+  flex: 0 0 auto;
 }
