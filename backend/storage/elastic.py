@@ -1,3 +1,4 @@
+from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.connections import connections
 from storage.article import Article
 
@@ -29,6 +30,20 @@ class ElasticStorage:
                 source=source
             )
             es_article.save()
+
+    def query_articles(self, query):
+        client = connections.get_connection()
+        search = Search(using=client)
+        q = Q('match', body=query)
+        search = search.query(q)
+        search.execute()
+        for hit in search:
+            yield {
+                'title': hit.title,
+                'body': hit.body,
+                'top_image': hit.top_image
+            }
+
 
 def main():
     es = ElasticStorage.get_instance()
