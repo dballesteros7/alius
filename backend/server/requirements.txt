@@ -2,3 +2,4 @@ Flask
 flask-cors
 elasticsearch-dsl
 redis
+watson-developer-cloud

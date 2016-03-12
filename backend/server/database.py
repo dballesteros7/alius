@@ -3,7 +3,7 @@ import json
 import redis
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.connections import connections
-from storage.article import Article
+from article import Article
 from watson_developer_cloud import WatsonException
 
 
@@ -51,6 +51,13 @@ class ElasticStorage:
                     'title': hit.title,
                     'body': hit.body,
                     'url': hit.url,
+                    'tone': dict(
+                        joy=hit.tone.joy,
+                        fear=hit.tone.fear,
+                        sadness=hit.tone.sadness,
+                        disgust=hit.tone.disgust,
+                        anger=hit.tone.anger
+                    ),
                     'top_image': hit.top_image
                 }
 

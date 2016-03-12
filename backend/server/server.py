@@ -44,6 +44,8 @@ def search():
 
     articles = es.query_articles(query)
     articles = list(articles)
+    articles = list({article['title']:article for article in articles}.values())
+
     for article in articles:
         for key, value in source_map.items():
             if key in article['url']:
@@ -57,11 +59,11 @@ def search():
 def popular():
     r = RedisClient.get_instance(dev=False)
     pop = r.hgetall('popular')
-    sorted_searches = sorted(pop, key=pop.__getitem__, reverse=True)[0:10]
+    sorted_searches = sorted(pop.items(), key=lambda x:int(x[1]), reverse=True)[0:10]
 
     final_dict = {}
     for sorted_search in sorted_searches:
-        final_dict[sorted_search.decode('utf-8')] = int(pop[sorted_search].decode('utf-8'))
+        final_dict[sorted_search[0].decode('utf-8')] = int(sorted_search[1].decode('utf-8'))
 
     return jsonify(final_dict)
 
