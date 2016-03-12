@@ -1,0 +1,83 @@
+<md-dialog>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Welcome to Alius!</h2>
+      <span flex></span>
+      <md-button class="md-icon-button">
+        <md-icon md-font-set="material-icons">close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content style="width:90%; height:90%;">
+    <md-tabs md-dynamic-height md-border-bottom md-selected="$ctrl.currentTabIndex">
+      <md-tab label="What is this?">
+        <md-content class="md-padding">
+          <p>
+            <i>Alius</i> is latin for <b>another</b> or <b>diverse</b>. Nowadays, it's very
+            easy to get captured by a single side of any story.
+          </p>
+          <p>
+            <i>Alius</i> provides an alternative news search app where
+            every side of a story is represented to widen your horizons.
+          </p>
+        </md-content>
+      </md-tab>
+      <md-tab label="The colors">
+        <md-content class="md-padding">
+          <i>Alius</i> utilizes IBM Watson to evaluate the tone of news articles
+          and scores them in 5 emotions. The shade of the color relates
+          to the strength of the perceived tone.
+          <md-list>
+            <md-list-item class="joy">
+              <div class="md-item-text">
+                Joy
+              </div>
+            </md-list-item>
+            <md-list-item class="fear">
+              <div class="md-item-text">
+                Fear
+              </div>
+            </md-list-item>
+            <md-list-item class="anger">
+              <div class="md-item-text">
+                Anger
+              </div>
+            </md-list-item>
+            <md-list-item class="disgust">
+              <div class="md-item-text">
+                Disgust
+              </div>
+            </md-list-item>
+            <md-list-item class="sadness">
+              <div class="md-item-text">
+                Sadness
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-tab>
+      <md-tab label="Enjoy!">
+        <md-content class="md-padding">
+          <p>
+            <i>Alius</i> lets you search for news,
+            see their predominant sentiments, save the articles you like,
+            and explore your preferred moods.
+          </p>
+          <p>
+            Send us feedback! We are happy to offer you a wider view of the world.
+          </p>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-show="$ctrl.isLastTab()" ng-click="$ctrl.accept()">
+      Let's start
+    </md-button>
+    <md-button ng-hide="$ctrl.isLastTab()" ng-click="$ctrl.nextTab()">
+      Next
+    </md-button>
+
+  </md-dialog-actions>
+</md-dialog>

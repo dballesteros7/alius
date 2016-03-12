@@ -20,16 +20,6 @@
       }).then(function (httpData) {
         $log.debug(httpData.data.articles);
         searchResultsService.endLoad();
-        for(var i = 0; i < httpData.data.articles.length; ++i) {
-          var article = httpData.data.articles[i];
-          article.tone = {
-            joy: Math.random(),
-            fear: Math.random(),
-            sadness: Math.random(),
-            disgust: Math.random(),
-            anger: Math.random()
-          };
-        }
         searchResultsService.updateResults(query, httpData.data.articles);
       })
     }

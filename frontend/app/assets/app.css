@@ -52,3 +52,28 @@ alius-search-bar > md-input-container.collapsed {
 .headliner {
   flex: 0 0 auto;
 }
+
+.joy {
+  background: #FFEB3B;
+  color: #000;
+}
+
+.anger {
+  background: #F44336;
+  color: #FFF;
+}
+
+.sadness {
+  background: #2196F3;
+  color: #FFF;
+}
+
+.disgust {
+  background: #9C27B0;
+  color: #FFF;
+}
+
+.fear {
+  background: #8BC34A;
+  color: #000;
+}
