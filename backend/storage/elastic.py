@@ -5,15 +5,18 @@ from storage.article import Article
 class ElasticStorage:
     _instance = None
 
-    def __init__(self):
-        self.url = 'http://134.168.38.217:9200'
+    def __init__(self, url):
+        self.url = url
         connections.create_connection(hosts=[self.url])
         Article.init()
 
     @classmethod
-    def get_instance(cls) -> 'ElasticStorage':
+    def get_instance(cls, dev=True) -> 'ElasticStorage':
         if cls._instance is None:
-            cls._instance = cls()
+            if dev:
+                cls._instance = cls(url='http://172.17.0.2:9200')
+            else:
+                cls._instance = cls(url='http://134.168.38.217:9200')
         return cls._instance
 
     def store_articles(self, downloaded_articles, source):
