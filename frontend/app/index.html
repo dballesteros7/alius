@@ -46,11 +46,22 @@
     <script src="node_modules/angular-aria/angular-aria.js"></script>
     <script src="node_modules/angular-material/angular-material.js"></script>
     <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="node_modules/angulartics/dist/angulartics.min.js"></script>
+    <script src="node_modules/angulartics-google-analytics/dist/angulartics-google-analytics.min.js"></script>
     <!-- endbuild -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-74982988-1', 'auto');
+    </script>
 
     <script type="text/javascript">
           angular.module('templates', []);
-          angular.module('alius', ['ngMaterial', 'templates', 'ui.router'])
+          angular.module('alius', ['ngMaterial', 'templates', 'ui.router', 'angulartics', 'angulartics.google.analytics'])
               .config(function($mdThemingProvider){
                  $mdThemingProvider.theme('default')
                         .primaryPalette('green')

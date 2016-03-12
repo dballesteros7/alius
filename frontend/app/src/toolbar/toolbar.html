@@ -1,6 +1,7 @@
 <md-toolbar layout="row" class="md-whiteframe-z1 md-medium-tall"
             layout-align="start center">
-  <md-button class="md-icon-button" ng-click="$ctrl.showSidenav()" hide-gt-sm>
+  <md-button class="md-icon-button" ng-click="$ctrl.showSidenav()" hide-gt-sm
+    analytics-on="click" analytics-event="menu-opened">
     <md-icon md-font-set="material-icons">menu</md-icon>
   </md-button>
   <h3 flex ng-show="$ctrl.titleShown" layout="row" layout-align="center stretch">

@@ -8,7 +8,8 @@
          ng-blur="$ctrl.onBlur($event)"
          alius-auto-focus alius-focus="$ctrl.focus" alius-blur="$ctrl.blur">
 </md-input-container>
-<md-button class="md-icon-button"
+<md-button class="md-icon-button" analytics-on="click"
+           analytics-event="search-bar-shown"
            ng-click="$ctrl.expand($event)" ng-show="$ctrl.showButton">
   <md-icon md-font-set="material-icons">search</md-icon>
 </md-button>

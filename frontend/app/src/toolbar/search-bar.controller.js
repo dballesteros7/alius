@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function SearchBarController(searchService, $log, $state) {
+  function SearchBarController($analytics, $log, $state) {
     var vm = this;
 
     vm.searchText = '';
@@ -50,6 +50,7 @@
     function onKeyPress($event) {
       $log.debug($event.keyCode);
       if ($event.keyCode === 13) {
+        $analytics.eventTrack('search');
         $state.go('search', {
           q: vm.searchText
         });
@@ -58,7 +59,7 @@
     }
   }
 
-  SearchBarController.$inject = ['searchService', '$log', '$state'];
+  SearchBarController.$inject = ['$analytics', '$log', '$state'];
 
   angular.module('alius')
       .controller('SearchBarController', SearchBarController);

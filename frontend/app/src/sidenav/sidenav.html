@@ -9,7 +9,8 @@
 
   </md-toolbar>
   <md-list flex>
-    <md-list-item ng-click="$ctrl.goTo('home')">
+    <md-list-item ng-click="$ctrl.goTo('home')" analytics-on="click"
+                  analytics-event="sidenav-home-click">
       <md-icon md-font-set="material-icons">home</md-icon>
       <p>Home</p>
     </md-list-item>

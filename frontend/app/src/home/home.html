@@ -6,6 +6,8 @@
             ng-show="$ctrl.results.length && !$ctrl.isLoading()">
   <md-list>
     <md-list-item ng-repeat="result in $ctrl.results"
+                  analytics-on="click"
+                  analytics-event="trending-word-click"
                   ng-class="{'md-display-2': $index < 2,
                              'md-display-1': $index >= 2 && $index < 4,
                              'md-headline': $index >= 4 && $index < 6,

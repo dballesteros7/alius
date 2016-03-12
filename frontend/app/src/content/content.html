@@ -5,8 +5,10 @@
             ng-show="$ctrl.results.length && !$ctrl.isLoading()">
   <div class="news-reel" ng-hide="$ctrl.isLoading()" layout="column" flex>
     <div ng-repeat="result in $ctrl.results" class="news-item" layout="row"
-      ng-click="$ctrl.openLink(result)"
-      md-ink-ripple="#000" sentiment-colorer sentiment="result.tone">
+         ng-click="$ctrl.openLink(result)"
+         analytics-on="click"
+         analytics-event="news-item-{{$index}}-click"
+         md-ink-ripple="#000" sentiment-colorer sentiment="result.tone">
         <div class="headline-image" layout="row" layout-align="center center">
           <img ng-src="{{ result.top_image }}">
         </div>
