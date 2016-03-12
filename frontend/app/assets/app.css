@@ -3,6 +3,7 @@ html, body {
 }
 
 .news-item {
+  cursor: pointer;
   flex: 0 0 auto;
   padding: 8px;
   position: relative;
@@ -80,4 +81,9 @@ alius-search-bar > md-input-container.collapsed {
 
 .md-scroll-mask {
   z-index: 10 !important;
+}
+
+.logo-cage {
+  max-width: 100%;
+  max-height: 100%;
 }

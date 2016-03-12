@@ -3,8 +3,7 @@
             md-is-locked-open="$mdMedia('gt-sm')" fe>
   <md-toolbar class="md-whiteframe-z1 md-medium-tall" layout-align="center stretch">
     <div class="md-toolbar-tools" layout="column" layout-align="start stretch">
-      <h3 class="md-title">Alius</h3>
-      <span class="md-subhead">A balanced view</span>
+      <img src="assets/logo.svg" class="logo-cage">
     </div>
 
   </md-toolbar>
@@ -18,11 +17,13 @@
       <md-icon md-font-set="material-icons">people</md-icon>
       <p>Team</p>
     </md-list-item>
-    <md-list-item>
+    <md-list-item ng-click="$ctrl.help()" analytics-on="click"
+                  analytics-event="sidenav-help-click">
       <md-icon md-font-set="material-icons">help</md-icon>
       <p>Help</p>
     </md-list-item>
-    <md-list-item>
+    <md-list-item ng-click="$ctrl.openForm()" analytics-on="click"
+                  analytics-event="sidenav-feedback-click">
       <md-icon md-font-set="material-icons">feedback</md-icon>
       <p>Feedback</p>
     </md-list-item>

@@ -8,6 +8,7 @@
     vm.isLastTab = isLastTab;
     vm.nextTab = nextTab;
     vm.accept = accept;
+    vm.dismiss = dismiss;
 
     var finished = false;
 
@@ -30,6 +31,10 @@
 
     function accept() {
       $mdDialog.hide();
+    }
+
+    function dismiss() {
+      $mdDialog.cancel();
     }
 
   }
