@@ -1,8 +1,14 @@
 (function () {
   'use strict';
 
-  function ContentController(searchResultsService, $window) {
+  function ContentController(searchService, searchResultsService, $window, $stateParams, $state) {
     var vm = this;
+
+    var q = $stateParams.q;
+    if (!q) {
+      $state.go('home');
+    }
+    searchService.search(q);
 
     vm.results = searchResultsService.results;
     vm.openLink = openLink;
@@ -24,7 +30,7 @@
     }
   }
 
-  ContentController.$inject = ['searchResultsService', '$window'];
+  ContentController.$inject = ['searchService', 'searchResultsService', '$window', '$stateParams', '$state'];
 
   angular.module('alius')
       .controller('ContentController', ContentController);

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function SearchBarController(searchService, $log, $timeout) {
+  function SearchBarController(searchService, $log, $state) {
     var vm = this;
 
     vm.searchText = '';
@@ -50,13 +50,15 @@
     function onKeyPress($event) {
       $log.debug($event.keyCode);
       if ($event.keyCode === 13) {
-        searchService.search(vm.searchText);
+        $state.go('search', {
+          q: vm.searchText
+        });
         vm.blur();
       }
     }
   }
 
-  SearchBarController.$inject = ['searchService', '$log', '$timeout'];
+  SearchBarController.$inject = ['searchService', '$log', '$state'];
 
   angular.module('alius')
       .controller('SearchBarController', SearchBarController);

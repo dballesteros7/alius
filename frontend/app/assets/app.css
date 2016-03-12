@@ -8,10 +8,7 @@ html, body {
   position: relative;
 }
 
-.news-headline {
-  padding-bottom: 8px;
-  position: relative;
-}
+
 
 .headline-image {
   flex: 2 0 40%;
