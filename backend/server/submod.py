@@ -18,9 +18,8 @@ def select_k_and_sort(documents, prefs):
         max_idx = None
         max_gain = -float('inf')
         for idx, feature_v in enumerate(features):
-            gain = feature_v[-1]
-            features_v_prime = [a * b for a, b in zip(feature_v[:-1], [prefs[key] for key in keys])]
-            for feature, feature_max in zip(features_v_prime, feature_maxes):
+            gain = feature_v[-1] + sum(a * b for a, b in zip(feature_v[:-1], [prefs[key] for key in keys]))
+            for feature, feature_max in zip(feature_v[:-1], feature_maxes):
                 if feature > feature_max:
                     gain -= feature_max
                 else:
