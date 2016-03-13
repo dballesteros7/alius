@@ -3,21 +3,33 @@
 </md-subheader>
 <md-content id="main-content" layout="column" flex
             ng-show="$ctrl.results.length && !$ctrl.isLoading()">
-  <div class="news-reel" ng-hide="$ctrl.isLoading()" layout="column" flex>
+  <div class="news-reel md-whiteframe-z2"
+       ng-hide="$ctrl.isLoading()" layout="column" flex>
     <div ng-repeat="result in $ctrl.results" class="news-item" layout="row"
-         ng-click="$ctrl.openLink(result)"
-         analytics-on="click"
-         analytics-event="news-item-{{$index}}-click"
-         md-ink-ripple="#000" sentiment-colorer sentiment="result.tone">
+         sentiment-colorer sentiment="result.tone">
         <div class="headline-image" layout="row" layout-align="center center">
           <img ng-src="{{ result.top_image }}">
         </div>
-        <div class="headline-text">
-          <div class="md-subhead">
-            {{ result.title }}
-          </div>
-          <div class="md-caption">
-            By {{ result.source }}
+        <div class="headline-text" layout="column" layout-align="center stretch">
+          <a ng-href="{{ result.url }}" class="real-link" flex
+             layout="column" layout-padding analytics-on="click"
+             analytics-event="news-item-{{$index}}-click">
+            <span class="md-subhead">
+              {{ result.title }}
+            </span>
+            <span class="md-caption">
+              By {{ result.source }}
+            </span>
+          </a>
+          <div style="align-self: flex-end">
+            <md-button class="md-fab emotion-button">
+              <md-icon md-font-set="material-icons">
+                {{ $ctrl.getSentimentIcon(result) }}
+              </md-icon>
+              <md-tooltip md-direction="left">
+                {{ $ctrl.getSentiment(result) }}
+              </md-tooltip>
+            </md-button>
           </div>
         </div>
     </div>
