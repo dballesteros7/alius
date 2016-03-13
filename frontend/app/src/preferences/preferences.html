@@ -1,0 +1,50 @@
+<md-content flex layout="column" layout-padding>
+  <h2 class="md-title">User Preferences</h2>
+  <p>Move the sliders to the left to avoid articles with that sentiment or
+     to the right to get more articles with it.</p>
+  <div layout="row" layout-xs="column">
+    <div flex="10" layout layout-align="center center">
+      <span class="md-body-1">Anger</span>
+    </div>
+    <md-slider flex md-discrete ng-model="$ctrl.prefs.anger" step="1" min="1" max="5"
+               ng-change="$ctrl.onChange()">
+    </md-slider>
+  </div>
+  <div layout="row" layout-xs="column">
+    <div layout flex="10" layout-align="center center">
+      <span class="md-body-1">Joy</span>
+    </div>
+    <md-slider flex md-discrete ng-model="$ctrl.prefs.joy" step="1" min="1" max="5"
+               ng-change="$ctrl.onChange()">
+    </md-slider>
+  </div>
+  <div layout="row" layout-xs="column">
+    <div layout flex="10" layout-align="center center">
+      <span class="md-body-1">Sadness</span>
+    </div>
+    <md-slider flex md-discrete ng-model="$ctrl.prefs.sadness" step="1" min="1" max="5"
+               ng-change="$ctrl.onChange()">
+    </md-slider>
+  </div>
+  <div layout="row" layout-xs="column">
+    <div layout  flex="10" layout-align="center center">
+      <span class="md-body-1">Disgust</span>
+    </div>
+    <md-slider flex md-discrete ng-model="$ctrl.prefs.disgust" step="1" min="1" max="5"
+               ng-change="$ctrl.onChange()">
+    </md-slider>
+  </div>
+  <div layout="row" layout-xs="column">
+    <div layout flex="10" layout-align="center center">
+      <span class="md-body-1">Fear</span>
+    </div>
+    <md-slider flex md-discrete ng-model="$ctrl.prefs.fear" step="1" min="1" max="5"
+               ng-change="$ctrl.onChange()">
+    </md-slider>
+  </div>
+  <div style="align-self: flex-end">
+    <md-button class="md-raised md-accent" ng-click="$ctrl.restartControls()">
+      Reset
+    </md-button>
+  </div>
+</md-content>

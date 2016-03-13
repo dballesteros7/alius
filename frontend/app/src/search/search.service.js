@@ -2,7 +2,7 @@
   'use strict';
 
 
-  function SearchService($http, $log, $q, searchResultsService) {
+  function SearchService($http, $log, $q, searchResultsService, preferenceStorageService) {
     var api = this;
 
     api.search = search;
@@ -14,8 +14,10 @@
       searchResultsService.startLoad();
       return $http({
         url: 'http://alius-server.eu-gb.mybluemix.net/search',
-        params: {
-          q: query
+        method: 'POST',
+        data: {
+          q: query,
+          prefs: preferenceStorageService.getForServer()
         }
       }).then(function (httpData) {
         $log.debug(httpData.data.articles);
@@ -26,21 +28,6 @@
 
     function popular() {
       searchResultsService.startLoad();
-      //return $q.when([]).then(function() {
-      //  searchResultsService.updateResults('', [
-      //    'a',
-      //    'b',
-      //    'c',
-      //    'd',
-      //    'e',
-      //    'f',
-      //    'g',
-      //    'h',
-      //    'i',
-      //    'j'
-      //  ]);
-      //  searchResultsService.endLoad();
-      //});
       return $http({
         url: 'http://alius-server.eu-gb.mybluemix.net/popular',
       }).then(function (httpData) {
@@ -61,7 +48,7 @@
     }
   }
 
-  SearchService.$inject = ['$http', '$log', '$q', 'searchResultsService'];
+  SearchService.$inject = ['$http', '$log', '$q', 'searchResultsService', 'preferenceStorageService'];
 
   angular.module('alius')
       .service('searchService', SearchService);

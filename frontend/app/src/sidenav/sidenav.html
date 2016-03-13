@@ -17,6 +17,11 @@
       <md-icon md-font-set="material-icons">people</md-icon>
       <p>Team</p>
     </md-list-item>
+    <md-list-item ng-click="$ctrl.goTo('preferences')" analytics-on="click"
+                  analytics-event="sidenav-preferences-click">
+      <md-icon md-font-set="material-icons">settings</md-icon>
+      <p>Preferences</p>
+    </md-list-item>
     <md-list-item ng-click="$ctrl.help()" analytics-on="click"
                   analytics-event="sidenav-help-click">
       <md-icon md-font-set="material-icons">help</md-icon>

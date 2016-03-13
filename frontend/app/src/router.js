@@ -12,6 +12,9 @@
         }).state('search', {
           url: '/search?q',
           template: '<alius-content flex layout="column"></alius-content>'
-        })
-      }])
+        }).state('preferences', {
+          url: '/preferences',
+          template: '<alius-preferences flex layout="column"></alius-preferences>'
+        });
+      }]);
 })();
