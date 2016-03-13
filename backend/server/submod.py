@@ -1,9 +1,11 @@
-def select_k_and_sort(documents):
+def select_k_and_sort(documents, prefs):
     features = []
+    keys = ['anger', 'fear', 'joy', 'disgust', 'sadness']
+
     for document in documents:
         feature_v = []
         tones = document['tone']
-        keys = ['anger', 'fear', 'joy', 'disgust', 'sadness']
+
         for key in keys:
             feature_v.append(float(tones[key]))
         feature_v.append(float(document['score']))
@@ -17,7 +19,8 @@ def select_k_and_sort(documents):
         max_gain = -float('inf')
         for idx, feature_v in enumerate(features):
             gain = feature_v[-1]
-            for feature, feature_max in zip(feature_v[:-1], feature_maxes):
+            features_v_prime = [a * b for a, b in zip(feature_v[:-1], [prefs[key] for key in keys])]
+            for feature, feature_max in zip(features_v_prime, feature_maxes):
                 if feature > feature_max:
                     gain -= feature_max
                 else:

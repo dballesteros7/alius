@@ -121,9 +121,11 @@ class ArticlesAPI(MethodView):
 
 app.add_url_rule('/articles/', view_func=ArticlesAPI.as_view('articles'))
 
-@app.route('/search')
+@app.route('/search', methods=['POST'])
 def search():
-    query = request.args.get('q', '')
+    data = json.loads(request.data.decode('utf-8'))
+    query = data['q']
+    prefs = data['prefs']
 
     es = ElasticStorage.get_instance(dev=False)
     r = RedisClient.get_instance(dev=False)
@@ -133,7 +135,7 @@ def search():
     else:
         r.hset('popular', query.lower(), 1)
 
-    articles = es.query_articles(query)
+    articles = es.query_articles(query, prefs)
     articles = list(articles)
     articles = list({article['title']:article for article in articles}.values())
 

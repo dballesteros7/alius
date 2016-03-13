@@ -107,17 +107,19 @@ class RealError(Exception):
 
 
 def main():
-    # while True:
-    es = ElasticStorage.get_instance(dev=False)
-    for doc in es.query_articles('Republican Party'):
-        print(doc)
-        # try:
-        #     es.update_sentiments()
-        # except RealError:
-        #     print('done')
-        #     return
-        # except Exception:
-        #     print('Crashed')
+
+    while True:
+        es = ElasticStorage.get_instance(dev=False)
+    # for doc in es.query_articles('Republican Party'):
+        #print(doc)
+        try:
+            es.update_sentiments()
+        except RealError:
+            print('done')
+            return
+        except Exception:
+            print('Crashed')
+
 
 if __name__ == '__main__':
     main()
