@@ -39,7 +39,7 @@ class ElasticStorage:
                 cls._instance = cls(url='http://134.168.38.217:9200')
         return cls._instance
 
-    def query_articles(self, query):
+    def query_articles(self, query, prefs):
         client = connections.get_connection()
         search = Search(using=client, index='articles')
         q = Q('bool', must=[Q('exists', field='watson_analyzed'),
@@ -68,7 +68,7 @@ class ElasticStorage:
         if len(documents) < 10:
             return documents
         else:
-            return select_k_and_sort(documents)
+            return select_k_and_sort(documents, prefs)
 
 
     def update_sentiments(self):
