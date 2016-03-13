@@ -13,6 +13,8 @@ html, body {
 
 .headline-image {
   flex: 2 0 40%;
+  max-width: 40%;
+  min-width: 40%;
   margin-right: 8px;
 }
 
@@ -23,7 +25,9 @@ html, body {
 }
 
 .headline-text {
-  flex: 3 0 calc(60% - 16px);
+  flex: 3 0 calc(50% - 16px);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 alius-search-bar.flexed {
@@ -117,4 +121,37 @@ alius-search-bar > md-input-container.collapsed {
 
 .clickable-tile {
   cursor: pointer;
+}
+
+a.real-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.real-link:hover > span {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.md-fab.emotion-button {
+  background-color: inherit !important;
+  color: inherit !important;
+}
+
+.emotion-button > md-icon {
+  color: inherit !important;
+}
+
+@media screen and (max-width: 500px){
+
+  .fullscreen-dialog {
+    height:100%;
+    width:100%;
+    max-height:100%;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+  }
 }

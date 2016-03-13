@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function SidenavController($state, $mdSidenav, onboardingService, $window) {
+  function SidenavController($state, $mdSidenav, onboardingService, $window, $mdMedia) {
     var vm = this;
 
     vm.goTo = goTo;
@@ -10,19 +10,28 @@
 
     function goTo(state) {
       $state.go(state);
-      $mdSidenav('left').toggle();
+      if (!$mdMedia('gt-sm')) {
+        $mdSidenav('left').toggle();
+      }
     }
 
     function help() {
       onboardingService.triggerOnboarding();
+      if (!$mdMedia('gt-sm')) {
+        $mdSidenav('left').toggle();
+      }
     }
 
     function openForm() {
       $window.open('http://goo.gl/forms/VWYgbSTQCg', '_blank');
+      if (!$mdMedia('gt-sm')) {
+        $mdSidenav('left').toggle();
+      }
+
     }
   }
 
-  SidenavController.$inject = ['$state', '$mdSidenav', 'onboardingService', '$window'];
+  SidenavController.$inject = ['$state', '$mdSidenav', 'onboardingService', '$window', '$mdMedia'];
 
   angular.module('alius')
       .controller('SidenavController', SidenavController);
